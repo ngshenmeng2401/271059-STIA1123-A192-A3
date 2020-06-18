@@ -147,7 +147,7 @@ public class NextDayDelivery extends JFrame implements ActionListener{
 
         if (e.getSource()==button1){
 
-//            new NDDbutton();
+            new NDDbutton();
             JOptionPane.showMessageDialog(this, "Data Saved");
 
         }if (e.getSource()==button2){
