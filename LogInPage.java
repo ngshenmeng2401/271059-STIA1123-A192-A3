@@ -76,7 +76,7 @@ public class LogInPage extends JFrame{
 
                 String username = usertext.getText();
                 String password = passwordText.getText();
-                if (username.trim().equals("SHENMENG") && password.trim().equals("Meng0124")) {
+                if (username.trim().equals("123") && password.trim().equals("123")) {
                     new MainMenu();
                     setVisible(false);
                 } else {

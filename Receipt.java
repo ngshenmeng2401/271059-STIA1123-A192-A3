@@ -1,31 +1,29 @@
 package Assignment2;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class Receipt extends JFrame implements ActionListener {
 
-    NDDbutton ndd = new NDDbutton();
-    NextDayDelivery delivery1 = new NextDayDelivery();
+    static NextDayDelivery delivery1 = new NextDayDelivery();
+    static SameDayDelivery delivery2 = new SameDayDelivery();
+    static PrepaidBoxEnvelope delivery3 = new PrepaidBoxEnvelope();
+    static PosEkspress delivery4 = new PosEkspress();
 
-    private JButton button2;
+    JButton button2;
     JLabel name,address,contactNo,NextDayDelivery,SameDayDelivery,PrepaidBoxEnvelope,PosEkspress,TotalPrice;
     JLabel label1,label2,label3,label4,label5,label6;
     JLabel line1,line2,line3;
     JTextField text1,text2,text3;
-    JButton button1;
-//    private double charge1=ndd.getCharge1();
-    private double charge1=delivery1.getCharge1();
-
-//    public static void main(String[] args) {
-//        new Receipt();
-//    }
+    private static double charge1=delivery1.getCharge1();
+    private static double charge2=delivery2.getCharge2();
+    private static double charge3=delivery3.getCharge3();
+    private static double charge4=delivery4.getCharge4();
 
     public Receipt(){
-
         getContentPane().setLayout(null);
         setTitle("Receipt");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,11 +48,11 @@ public class Receipt extends JFrame implements ActionListener {
         text3= new JTextField(30);
 
         label1= new JLabel("Your Bill:");
-        label2= new JLabel("0");
-        label3= new JLabel("0");
-        label4= new JLabel("0");
-        label5= new JLabel("0");
-        label6= new JLabel("0");
+        label2= new JLabel();
+        label3= new JLabel();
+        label4= new JLabel();
+        label5= new JLabel();
+        label6= new JLabel();
 
         //Set Location & Size
         name.setBounds(50, 50, 200, 20);
@@ -82,10 +80,21 @@ public class Receipt extends JFrame implements ActionListener {
         label5.setBounds(200, 310, 200, 20);
         label6.setBounds(200, 350, 200, 20);
 
+        //Convert Double to String
         String amount1 = Double.toString(charge1);
-        label2.setText((amount1));
+        String amount2 = Double.toString(charge2);
+        String amount3 = Double.toString(charge3);
+        String amount4 = Double.toString(charge4);
+        Double totalprice=charge1+charge2+charge3+charge4;
+        String amount5 = Double.toString(totalprice);
 
+        label2.setText(amount1);
+        label3.setText(amount2);
+        label4.setText(amount3);
+        label5.setText(amount4);
+        label6.setText(amount5);
 
+        //Add object
         add(name);
         add(address);
         add(contactNo);
@@ -126,4 +135,5 @@ public class Receipt extends JFrame implements ActionListener {
             setVisible(false);
         }
     }
+
 }

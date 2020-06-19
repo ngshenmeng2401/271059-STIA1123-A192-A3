@@ -18,7 +18,8 @@ public class SameDayDelivery extends JFrame implements ActionListener{
     private JButton button1,button2;
     private JTextField textField;
     private JRadioButton rb1,rb2;
-    private String packtype;
+    private static double weight,charge2,domestic_charge,surcharge;
+
 
     public SameDayDelivery() {
 
@@ -120,11 +121,43 @@ public class SameDayDelivery extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==button1){
 
+            String text = textField.getText();
+            weight= Double.parseDouble(text);
+
+            if (rb1.isSelected()){
+                if(weight<=500){
+                    domestic_charge=4.90;
+                    surcharge=6.00;
+                }if(weight>500&&weight<=750){
+                    domestic_charge=5.70;
+                    surcharge=6.00;
+                }if(weight>750&&weight<=1000){
+                    domestic_charge=6.50;
+                    surcharge=6.00;
+                }
+            }if (rb2.isSelected()){
+                if(weight<=500){
+                    domestic_charge=5.40;
+                    surcharge=7.50;
+                }if(weight>500&&weight<=750){
+                    domestic_charge=6.40;
+                    surcharge=7.50;
+                }if(weight>750&&weight<=1000){
+                    domestic_charge=7.40;
+                    surcharge=7.50;
+                }
+            }
+
             JOptionPane.showMessageDialog(this, "Data Saved");
 
         }if (e.getSource()==button2){
             new MainMenu();
             setVisible(false);
         }
+        charge2=domestic_charge+surcharge;
+    }
+
+    public static double getCharge2() {
+        return charge2;
     }
 }

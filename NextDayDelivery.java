@@ -18,7 +18,7 @@ public class NextDayDelivery extends JFrame implements ActionListener{
     private JRadioButton rb1,rb2,rb3,rb4,rb5,rb6,rb7;
     private JTextField textField;
     private JButton button1,button2;
-    private double weight,charge1;
+    private static double weight,charge1;
 
     public NextDayDelivery() {
 
@@ -245,17 +245,16 @@ public class NextDayDelivery extends JFrame implements ActionListener{
                     }
                 }
             }
-
             JOptionPane.showMessageDialog(this, "Data Saved");
 
         }if (e.getSource()==button2){
             new MainMenu();
             setVisible(false);
         }
-
     }
 
     public double getCharge1() {
         return charge1;
     }
+
 }

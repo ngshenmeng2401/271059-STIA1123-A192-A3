@@ -14,7 +14,9 @@ public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
     private JPanel contentPane;
     private JTable table;
     private JButton button1,button2;
-    private JTextField textField;
+    private JTextField textField1,textField2;
+    private static double charge3,price,weight;
+    private int quantity;
 
     public PrepaidBoxEnvelope() {
         addWindowListener(new WindowAdapter() {
@@ -36,15 +38,25 @@ public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
         JPanel panel = new JPanel();
         contentPane.add(panel, BorderLayout.SOUTH);
 
-        textField = new JTextField();
-        textField.setBounds(150, 200, 165, 25);
-        textField.setBackground(Color.white);
-        contentPane.add(textField);
+        textField1 = new JTextField();
+        textField1.setBounds(150, 200, 165, 25);
+        textField1.setBackground(Color.white);
+        contentPane.add(textField1);
         panel.setBackground(Color.white);
 
-        JLabel label = new JLabel("Weight:");
-        label.setBounds(20, 200, 100, 25);
-        contentPane.add(label);
+        textField2 = new JTextField();
+        textField2.setBounds(150, 240, 165, 25);
+        textField2.setBackground(Color.white);
+        contentPane.add(textField2);
+        panel.setBackground(Color.white);
+
+        JLabel label1 = new JLabel("Weight:");
+        label1.setBounds(20, 200, 100, 25);
+        contentPane.add(label1);
+
+        JLabel label2 = new JLabel("Quantity:");
+        label2.setBounds(20, 240, 100, 25);
+        contentPane.add(label2);
 
         button1 = new JButton("Save");
         button1.setBounds(40, 300, 100, 25);
@@ -81,11 +93,32 @@ public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==button1){
 
+            String text1 = textField1.getText();
+            weight= Double.parseDouble(text1);
+            String text2 = textField2.getText();
+            quantity=Integer.parseInt(text2);
+
+            if(weight<=500){
+                price=7.31;
+            }if(weight>500&&weight<=1000){
+                price=10.49;
+            }if(weight>1000&&weight<=2000){
+                price=13.78;
+            }if(weight>2000&&weight<=5000){
+                price=21.20;
+            }if(weight>5000&&weight<=10000){
+                price=31.80;
+            }
+            charge3=price*quantity;
             JOptionPane.showMessageDialog(this, "Data Saved");
 
         }if (e.getSource()==button2){
             new MainMenu();
             setVisible(false);
         }
+    }
+
+    public static double getCharge3() {
+        return charge3;
     }
 }
