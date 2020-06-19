@@ -4,22 +4,27 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NDDbutton extends NextDayDelivery {
+public class NDDbutton implements ActionListener{
 
-
-    private JRadioButton rb1,rb2,rb3,rb4,rb5,rb6,rb7;
+    private JRadioButton rb1;
+    private JRadioButton rb2;
+    private JRadioButton rb3;
+    private JRadioButton rb4;
+    private JRadioButton rb5;
+    private JRadioButton rb6;
+    private JRadioButton rb7;
     private JTextField textField;
-    private JButton button1,button2;
     private double weight,charge1;
     private String packtype;
 
-    public NDDbutton(){
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
         if (rb1.isSelected()){
-                packtype="Document";
-            }if (rb2.isSelected()){
-                packtype="Parcel";
-            }
+            packtype="Document";
+        }if (rb2.isSelected()){
+            packtype="Parcel";
+        }
         String text = textField.getText();
         weight= Double.parseDouble(text);
         if (rb3.isSelected()){
@@ -114,4 +119,7 @@ public class NDDbutton extends NextDayDelivery {
 
     }
 
+    public double getCharge1() {
+        return charge1;
+    }
 }

@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 public class LogInPage extends JFrame{
 
+    JTextField usertext;
+
     public static void main(String[] args) {
 
         new LogInPage();
@@ -35,7 +37,7 @@ public class LogInPage extends JFrame{
         label.setBounds(10, 20, 80, 25);
         panel.add(label);
 
-        JTextField usertext = new JTextField();
+        usertext = new JTextField();
         usertext.setBounds(100, 20, 165, 25);
         panel.add(usertext);
 
@@ -82,5 +84,9 @@ public class LogInPage extends JFrame{
                 }
             }
         });
+    }
+
+    public JTextField getUsertext() {
+        return usertext;
     }
 }
