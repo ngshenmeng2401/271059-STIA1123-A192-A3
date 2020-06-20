@@ -3,8 +3,6 @@ package Assignment2;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class Receipt extends JFrame implements ActionListener {
 
@@ -14,7 +12,7 @@ public class Receipt extends JFrame implements ActionListener {
     static PosEkspress delivery4 = new PosEkspress();
 
     JButton button2;
-    JLabel name,address,contactNo,NextDayDelivery,SameDayDelivery,PrepaidBoxEnvelope,PosEkspress,TotalPrice;
+    JLabel name,address,contactNo,nextdaydelivery,samedaydelivery, prepaidboxenvelope, posekspress, totalprice;
     JLabel label1,label2,label3,label4,label5,label6;
     JLabel line1,line2,line3;
     JTextField text1,text2,text3;
@@ -24,6 +22,7 @@ public class Receipt extends JFrame implements ActionListener {
     private static double charge4=delivery4.getCharge4();
 
     public Receipt(){
+
         getContentPane().setLayout(null);
         setTitle("Receipt");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,11 +32,11 @@ public class Receipt extends JFrame implements ActionListener {
         contactNo = new JLabel("Contact No: ");
 
 
-        NextDayDelivery= new JLabel("Next-Day Delivery:");
-        SameDayDelivery= new JLabel("Same-Day Delivery:");
-        PrepaidBoxEnvelope= new JLabel("Prepaid Box Envelope:");
-        PosEkspress = new JLabel("Pos Ekspress:");
-        TotalPrice = new JLabel("Total Price:");
+        nextdaydelivery = new JLabel("Next-Day Delivery:");
+        samedaydelivery = new JLabel("Same-Day Delivery:");
+        prepaidboxenvelope = new JLabel("Prepaid Box Envelope:");
+        posekspress = new JLabel("Pos Ekspress:");
+        totalprice = new JLabel("Total Price:");
 
         line1= new JLabel("-----------------------------------------------------------");
         line2= new JLabel("-----------------------------------------------------------");
@@ -59,11 +58,11 @@ public class Receipt extends JFrame implements ActionListener {
         address.setBounds(50, 80, 200, 20);
         contactNo.setBounds(50, 110, 200, 20);
 
-        NextDayDelivery.setBounds(50, 220, 200, 20);
-        SameDayDelivery.setBounds(50, 250, 200, 20);
-        PrepaidBoxEnvelope.setBounds(50, 280, 200, 20);
-        PosEkspress.setBounds(50, 310, 200, 20);
-        TotalPrice.setBounds(50,350,200,20);
+        nextdaydelivery.setBounds(50, 220, 200, 20);
+        samedaydelivery.setBounds(50, 250, 200, 20);
+        prepaidboxenvelope.setBounds(50, 280, 200, 20);
+        posekspress.setBounds(50, 310, 200, 20);
+        totalprice.setBounds(50,350,200,20);
 
         line1.setBounds(50,200,400,10);
         line2.setBounds(50,330,400,10);
@@ -98,11 +97,11 @@ public class Receipt extends JFrame implements ActionListener {
         add(name);
         add(address);
         add(contactNo);
-        add(NextDayDelivery);
-        add(SameDayDelivery);
-        add(PrepaidBoxEnvelope);
-        add(PosEkspress);
-        add(TotalPrice);
+        add(nextdaydelivery);
+        add(samedaydelivery);
+        add(prepaidboxenvelope);
+        add(posekspress);
+        add(this.totalprice);
 
         add(line1);
         add(line2);
@@ -122,6 +121,11 @@ public class Receipt extends JFrame implements ActionListener {
         button2.setBounds(600, 450, 100, 25);
         add(button2);
         button2.addActionListener(this);
+
+        delivery1.setVisible(false);
+        delivery2.setVisible(false);
+        delivery3.setVisible(false);
+        delivery4.setVisible(false);
 
         setVisible(true);
         setSize(800,600);

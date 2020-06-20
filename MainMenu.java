@@ -93,7 +93,7 @@ public class MainMenu extends JFrame implements ActionListener{
 
         }if (e.getSource()==button6){
             JOptionPane.showMessageDialog(this, "Thanks For Using Our System");
-            setVisible(false);
+            System.exit(0);
         }
     }
 }

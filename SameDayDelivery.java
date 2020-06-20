@@ -10,14 +10,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class SameDayDelivery extends JFrame implements ActionListener{
 
     private JPanel contentPane;
     private JTable table;
     private JButton button1,button2;
-    private JTextField textField;
-    private JRadioButton rb1,rb2;
+    private JTextField textField2;
+    private JRadioButton rb8, rb9;
     private static double weight,charge2,domestic_charge,surcharge;
 
 
@@ -44,21 +45,21 @@ public class SameDayDelivery extends JFrame implements ActionListener{
 
         JLabel label1 = new JLabel("Town Type:");
         label1.setBounds(20, 170, 150, 25);
-        rb1 = new JRadioButton("Local");
-        rb1.setBounds(150, 170, 100, 25);
-        rb2 = new JRadioButton("Cross");
-        rb2.setBounds(250, 170, 100, 25);
+        rb8 = new JRadioButton("Local");
+        rb8.setBounds(150, 170, 100, 25);
+        rb9 = new JRadioButton("Cross");
+        rb9.setBounds(250, 170, 100, 25);
         ButtonGroup group = new ButtonGroup();
-        group.add(rb1);
-        group.add(rb2);
+        group.add(rb8);
+        group.add(rb9);
         contentPane.add(label1);
-        contentPane.add(rb1);
-        contentPane.add(rb2);
+        contentPane.add(rb8);
+        contentPane.add(rb9);
 
-        textField = new JTextField();
-        textField.setBounds(150, 230, 165, 25);
-        textField.setBackground(Color.white);
-        contentPane.add(textField);
+        textField2 = new JTextField();
+        textField2.setBounds(150, 230, 165, 25);
+        textField2.setBackground(Color.white);
+        contentPane.add(textField2);
         panel.setBackground(Color.white);
 
         JLabel label2 = new JLabel("Weight:");
@@ -119,36 +120,42 @@ public class SameDayDelivery extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==button1){
 
-            String text = textField.getText();
-            weight= Double.parseDouble(text);
+        try{
+            if (e.getSource()==button1){
 
-            if (rb1.isSelected()){
-                if(weight<=500){
-                    domestic_charge=4.90;
-                    surcharge=6.00;
-                }if(weight>500&&weight<=750){
-                    domestic_charge=5.70;
-                    surcharge=6.00;
-                }if(weight>750&&weight<=1000){
-                    domestic_charge=6.50;
-                    surcharge=6.00;
+                String text = textField2.getText();
+                weight= Double.parseDouble(text);
+
+                if (rb8.isSelected()){
+                    if(weight<=500){
+                        domestic_charge=4.90;
+                        surcharge=6.00;
+                    }if(weight>500&&weight<=750){
+                        domestic_charge=5.70;
+                        surcharge=6.00;
+                    }if(weight>750&&weight<=1000){
+                        domestic_charge=6.50;
+                        surcharge=6.00;
+                    }
+                }if (rb9.isSelected()){
+                    if(weight<=500){
+                        domestic_charge=5.40;
+                        surcharge=7.50;
+                    }if(weight>500&&weight<=750){
+                        domestic_charge=6.40;
+                        surcharge=7.50;
+                    }if(weight>750&&weight<=1000){
+                        domestic_charge=7.40;
+                        surcharge=7.50;
+                    }
                 }
-            }if (rb2.isSelected()){
-                if(weight<=500){
-                    domestic_charge=5.40;
-                    surcharge=7.50;
-                }if(weight>500&&weight<=750){
-                    domestic_charge=6.40;
-                    surcharge=7.50;
-                }if(weight>750&&weight<=1000){
-                    domestic_charge=7.40;
-                    surcharge=7.50;
-                }
+
+                JOptionPane.showMessageDialog(this, "Data Saved");
+
             }
-
-            JOptionPane.showMessageDialog(this, "Data Saved");
+        }catch (NumberFormatException e1){
+            JOptionPane.showMessageDialog(this, "Please select radio button and key in data!!!");
 
         }if (e.getSource()==button2){
             new MainMenu();
@@ -157,7 +164,7 @@ public class SameDayDelivery extends JFrame implements ActionListener{
         charge2=domestic_charge+surcharge;
     }
 
-    public static double getCharge2() {
+    public double getCharge2() {
         return charge2;
     }
 }

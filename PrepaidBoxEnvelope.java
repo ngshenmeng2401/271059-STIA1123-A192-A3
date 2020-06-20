@@ -8,13 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
 
     private JPanel contentPane;
     private JTable table;
     private JButton button1,button2;
-    private JTextField textField1,textField2;
+    private JTextField textField3, textField4;
     private static double charge3,price,weight;
     private int quantity;
 
@@ -38,16 +39,16 @@ public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
         JPanel panel = new JPanel();
         contentPane.add(panel, BorderLayout.SOUTH);
 
-        textField1 = new JTextField();
-        textField1.setBounds(150, 200, 165, 25);
-        textField1.setBackground(Color.white);
-        contentPane.add(textField1);
+        textField3 = new JTextField();
+        textField3.setBounds(150, 200, 165, 25);
+        textField3.setBackground(Color.white);
+        contentPane.add(textField3);
         panel.setBackground(Color.white);
 
-        textField2 = new JTextField();
-        textField2.setBounds(150, 240, 165, 25);
-        textField2.setBackground(Color.white);
-        contentPane.add(textField2);
+        textField4 = new JTextField();
+        textField4.setBounds(150, 240, 165, 25);
+        textField4.setBackground(Color.white);
+        contentPane.add(textField4);
         panel.setBackground(Color.white);
 
         JLabel label1 = new JLabel("Weight:");
@@ -91,34 +92,41 @@ public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==button1){
 
-            String text1 = textField1.getText();
-            weight= Double.parseDouble(text1);
-            String text2 = textField2.getText();
-            quantity=Integer.parseInt(text2);
+        try{
+            if (e.getSource()==button1){
 
-            if(weight<=500){
-                price=7.31;
-            }if(weight>500&&weight<=1000){
-                price=10.49;
-            }if(weight>1000&&weight<=2000){
-                price=13.78;
-            }if(weight>2000&&weight<=5000){
-                price=21.20;
-            }if(weight>5000&&weight<=10000){
-                price=31.80;
+                String text1 = textField3.getText();
+                weight= Double.parseDouble(text1);
+                String text2 = textField4.getText();
+                quantity=Integer.parseInt(text2);
+
+                if(weight<=500){
+                    price=7.31;
+                }if(weight>500&&weight<=1000){
+                    price=10.49;
+                }if(weight>1000&&weight<=2000){
+                    price=13.78;
+                }if(weight>2000&&weight<=5000){
+                    price=21.20;
+                }if(weight>5000&&weight<=10000){
+                    price=31.80;
+                }
+                charge3=price*quantity;
+                JOptionPane.showMessageDialog(this, "Data Saved");
+
             }
-            charge3=price*quantity;
-            JOptionPane.showMessageDialog(this, "Data Saved");
+        }catch (NumberFormatException e1){
+            JOptionPane.showMessageDialog(this, "Please key in data!!!");
 
-        }if (e.getSource()==button2){
+        }
+        if (e.getSource()==button2){
             new MainMenu();
             setVisible(false);
         }
     }
 
-    public static double getCharge3() {
+    public double getCharge3() {
         return charge3;
     }
 }

@@ -8,13 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class PosEkspress extends JFrame implements ActionListener{
 
     private JPanel contentPane;
     private JTable table;
     private JButton button1,button2;
-    private JTextField textField1,textField2;
+    private JTextField textField5, textField6;
     private static double charge4,price,weight;
     private int quantity;
 
@@ -40,16 +41,16 @@ public class PosEkspress extends JFrame implements ActionListener{
         contentPane.add(panel, BorderLayout.SOUTH);
 
 
-        textField1 = new JTextField();
-        textField1.setBounds(150, 200, 165, 25);
-        textField1.setBackground(Color.white);
-        contentPane.add(textField1);
+        textField5 = new JTextField();
+        textField5.setBounds(150, 200, 165, 25);
+        textField5.setBackground(Color.white);
+        contentPane.add(textField5);
         panel.setBackground(Color.white);
 
-        textField2 = new JTextField();
-        textField2.setBounds(150, 240, 165, 25);
-        textField2.setBackground(Color.white);
-        contentPane.add(textField2);
+        textField6 = new JTextField();
+        textField6.setBounds(150, 240, 165, 25);
+        textField6.setBackground(Color.white);
+        contentPane.add(textField6);
         panel.setBackground(Color.white);
 
         JLabel label1 = new JLabel("Weight:");
@@ -94,33 +95,40 @@ public class PosEkspress extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==button1){
 
-            String text1 = textField1.getText();
-            weight= Double.parseDouble(text1);
-            String text2 = textField2.getText();
-            quantity=Integer.parseInt(text2);
+        try{
+            if (e.getSource()==button1){
 
-            if(weight<=100){
-                price=3.18;
-            }if(weight>100&&weight<=250){
-                price=3.71;
-            }if(weight>250&&weight<=500){
-                price=4.77;
-            }if(weight>500&&weight<=1000){
-                price=7.42;
+                String text1 = textField5.getText();
+                weight= Double.parseDouble(text1);
+                String text2 = textField6.getText();
+                quantity=Integer.parseInt(text2);
+
+                if(weight<=100){
+                    price=3.18;
+                }if(weight>100&&weight<=250){
+                    price=3.71;
+                }if(weight>250&&weight<=500){
+                    price=4.77;
+                }if(weight>500&&weight<=1000){
+                    price=7.42;
+                }
+
+                charge4=price*quantity;
+                JOptionPane.showMessageDialog(this, "Data Saved");
+
             }
+        }catch (NumberFormatException e1){
+            JOptionPane.showMessageDialog(this, "Please key in data!!!");
 
-            charge4=price*quantity;
-            JOptionPane.showMessageDialog(this, "Data Saved");
-
-        }if (e.getSource()==button2){
+        }
+        if (e.getSource()==button2){
             new MainMenu();
             setVisible(false);
         }
     }
 
-    public static double getCharge4() {
+    public double getCharge4() {
         return charge4;
     }
 }

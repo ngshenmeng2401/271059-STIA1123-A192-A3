@@ -10,18 +10,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class NextDayDelivery extends JFrame implements ActionListener{
+
 
     private JPanel contentPane;
     private JTable table;
     private JRadioButton rb1,rb2,rb3,rb4,rb5,rb6,rb7;
-    private JTextField textField;
+    private JTextField textField1;
     private JButton button1,button2;
     private static double weight,charge1;
 
     public NextDayDelivery() {
-
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -42,60 +43,59 @@ public class NextDayDelivery extends JFrame implements ActionListener{
         JPanel panel = new JPanel();
         contentPane.add(panel, BorderLayout.SOUTH);
 
-        JLabel label1 = new JLabel("Package Type:");
-        label1.setBounds(20, 220, 130, 25);
-        rb1 = new JRadioButton("Document");
-        rb1.setBounds(150, 220, 100, 25);
-        rb2 = new JRadioButton("Parcel");
-        rb2.setBounds(270, 220, 100, 25);
-        ButtonGroup group1 = new ButtonGroup();
-        group1.add(rb1);
-        group1.add(rb2);
-        contentPane.add(label1);
-        contentPane.add(rb1);
-        contentPane.add(rb2);
+            JLabel label1 = new JLabel("Package Type:");
+            label1.setBounds(20, 220, 130, 25);
+            rb1 = new JRadioButton("Document");
+            rb1.setBounds(150, 220, 100, 25);
+            rb2 = new JRadioButton("Parcel");
+            rb2.setBounds(270, 220, 100, 25);
+            ButtonGroup group1 = new ButtonGroup();
+            group1.add(rb1);
+            group1.add(rb2);
+            contentPane.add(label1);
+            contentPane.add(rb1);
+            contentPane.add(rb2);
 
-        JLabel label2 = new JLabel("Zone:");
-        label2.setBounds(20, 260, 165, 25);
-        rb3 = new JRadioButton("1");
-        rb3.setBounds(150, 260, 50, 25);
-        rb4 = new JRadioButton("2");
-        rb4.setBounds(200, 260, 50, 25);
-        rb5 = new JRadioButton("3");
-        rb5.setBounds(250, 260, 50, 25);
-        rb6 = new JRadioButton("4");
-        rb6.setBounds(300, 260, 50, 25);
-        rb7 = new JRadioButton("5");
-        rb7.setBounds(350, 260, 50, 25);
-        ButtonGroup group2 = new ButtonGroup();
-        group2.add(rb3);
-        group2.add(rb4);
-        group2.add(rb5);
-        group2.add(rb6);
-        group2.add(rb7);
-        contentPane.add(label2);
-        contentPane.add(rb3);
-        contentPane.add(rb4);
-        contentPane.add(rb5);
-        contentPane.add(rb6);
-        contentPane.add(rb7);
+            JLabel label2 = new JLabel("Zone:");
+            label2.setBounds(20, 260, 165, 25);
+            rb3 = new JRadioButton("1");
+            rb3.setBounds(150, 260, 50, 25);
+            rb4 = new JRadioButton("2");
+            rb4.setBounds(200, 260, 50, 25);
+            rb5 = new JRadioButton("3");
+            rb5.setBounds(250, 260, 50, 25);
+            rb6 = new JRadioButton("4");
+            rb6.setBounds(300, 260, 50, 25);
+            rb7 = new JRadioButton("5");
+            rb7.setBounds(350, 260, 50, 25);
+            ButtonGroup group2 = new ButtonGroup();
+            group2.add(rb3);
+            group2.add(rb4);
+            group2.add(rb5);
+            group2.add(rb6);
+            group2.add(rb7);
+            contentPane.add(label2);
+            contentPane.add(rb3);
+            contentPane.add(rb4);
+            contentPane.add(rb5);
+            contentPane.add(rb6);
+            contentPane.add(rb7);
 
-        rb3.addActionListener(this);
-        rb4.addActionListener(this);
-        rb5.addActionListener(this);
-        rb6.addActionListener(this);
-        rb7.addActionListener(this);
+            rb3.addActionListener(this);
+            rb4.addActionListener(this);
+            rb5.addActionListener(this);
+            rb6.addActionListener(this);
+            rb7.addActionListener(this);
 
+            textField1 = new JTextField();
+            textField1.setBounds(150, 310, 165, 25);
+            textField1.setBackground(Color.white);
+            contentPane.add(textField1);
+            panel.setBackground(Color.white);
 
-        textField = new JTextField();
-        textField.setBounds(150, 310, 165, 25);
-        textField.setBackground(Color.white);
-        contentPane.add(textField);
-        panel.setBackground(Color.white);
-
-        JLabel label3 = new JLabel("Weight:");
-        label3.setBounds(20, 310, 100, 25);
-        contentPane.add(label3);
+            JLabel label3 = new JLabel("Weight:");
+            label3.setBounds(20, 310, 100, 25);
+            contentPane.add(label3);
 
         button1 = new JButton("Save");
         button1.setBounds(40, 350, 100, 25);
@@ -152,100 +152,105 @@ public class NextDayDelivery extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource()==button1){
+        try{
+            if (e.getSource()==button1){
 
-            String text = textField.getText();
-            weight= Double.parseDouble(text);
-            if (rb3.isSelected()){
-                if (weight <= 2000) {
+                String text = textField1.getText();
+                weight= Double.parseDouble(text);
+                if (rb3.isSelected()){
                     if (weight <= 2000) {
-                        charge1 = 4.90 + (weight - 500) / 250 * 0.80;
+                        if (weight <= 2000) {
+                            charge1 = 4.90 + (weight - 500) / 250 * 0.80;
+                        }
+                        if (weight <= 500) {
+                            charge1 = 4.90;
+                        }
+                    }if (weight > 2000) {
+                        if (weight <= 2500) {
+                            charge1 = 10.50;
+                        }
+                        if (weight > 2500) {
+                            charge1 = 10.50 + (weight - 2500) / 500 * 0.50;
+                        }
                     }
-                    if (weight <= 500) {
-                        charge1 = 4.90;
-                    }
-                }if (weight > 2000) {
-                    if (weight <= 2500) {
-                        charge1 = 10.50;
-                    }
-                    if (weight > 2500) {
-                        charge1 = 10.50 + (weight - 2500) / 500 * 0.50;
-                    }
-                }
 
-            }if (rb4.isSelected()){
-                if (weight <= 2000) {
+                }if (rb4.isSelected()){
                     if (weight <= 2000) {
-                        charge1 = 5.40 + (weight - 500) / 250 * 1.00;
+                        if (weight <= 2000) {
+                            charge1 = 5.40 + (weight - 500) / 250 * 1.00;
+                        }
+                        if (weight <= 500) {
+                            charge1 = 5.40;
+                        }
                     }
-                    if (weight <= 500) {
-                        charge1 = 5.40;
+                    if (weight > 2000) {
+                        if (weight <= 2500) {
+                            charge1 = 16.00;
+                        }
+                        if (weight > 2500) {
+                            charge1 = 16.00 + (weight - 2500) / 500 * 2.00;
+                        }
                     }
-                }
-                if (weight > 2000) {
-                    if (weight <= 2500) {
-                        charge1 = 16.00;
-                    }
-                    if (weight > 2500) {
-                        charge1 = 16.00 + (weight - 2500) / 500 * 2.00;
-                    }
-                }
 
-            }if (rb5.isSelected()){
-                if (weight <= 2000) {
+                }if (rb5.isSelected()){
                     if (weight <= 2000) {
-                        charge1 = 6.90 + (weight - 500) / 250 * 1.50;
+                        if (weight <= 2000) {
+                            charge1 = 6.90 + (weight - 500) / 250 * 1.50;
+                        }
+                        if (weight <= 500) {
+                            charge1 = 6.90;
+                        }
                     }
-                    if (weight <= 500) {
-                        charge1 = 6.90;
+                    if (weight > 2000) {
+                        if (weight <= 2500) {
+                            charge1 = 21.00;
+                        }
+                        if (weight > 2500) {
+                            charge1 = 21.00 + (weight - 2500) / 500 * 3.00;
+                        }
                     }
-                }
-                if (weight > 2000) {
-                    if (weight <= 2500) {
-                        charge1 = 21.00;
-                    }
-                    if (weight > 2500) {
-                        charge1 = 21.00 + (weight - 2500) / 500 * 3.00;
-                    }
-                }
 
-            }if (rb6.isSelected()){
-                if (weight <= 2000) {
+                }if (rb6.isSelected()){
                     if (weight <= 2000) {
-                        charge1 = 7.40 + (weight - 500) / 250 * 1.50;
+                        if (weight <= 2000) {
+                            charge1 = 7.40 + (weight - 500) / 250 * 1.50;
+                        }
+                        if (weight <= 500) {
+                            charge1 = 7.40;
+                        }
                     }
-                    if (weight <= 500) {
-                        charge1 = 7.40;
+                    if (weight > 2000) {
+                        if (weight <= 2500) {
+                            charge1 = 26.00;
+                        }
+                        if (weight > 2500) {
+                            charge1 = 26.00 + (weight - 2500) / 500 * 3.50;
+                        }
                     }
-                }
-                if (weight > 2000) {
-                    if (weight <= 2500) {
-                        charge1 = 26.00;
-                    }
-                    if (weight > 2500) {
-                        charge1 = 26.00 + (weight - 2500) / 500 * 3.50;
-                    }
-                }
 
-            }if (rb7.isSelected()){
-                if (weight <= 2000) {
+                }if (rb7.isSelected()){
                     if (weight <= 2000) {
-                        charge1 = 7.90 + (weight - 500) / 250 * 2.00;
+                        if (weight <= 2000) {
+                            charge1 = 7.90 + (weight - 500) / 250 * 2.00;
+                        }
+                        if (weight <= 500) {
+                            charge1 = 7.90;
+                        }
                     }
-                    if (weight <= 500) {
-                        charge1 = 7.90;
+                    if (weight > 2000) {
+                        if (weight <= 2500) {
+                            charge1 = 31.00;
+                        }
+                        if (weight > 2500) {
+                            charge1 = 31.00 + (weight - 2500) / 500 * 4.00;
+                        }
                     }
                 }
-                if (weight > 2000) {
-                    if (weight <= 2500) {
-                        charge1 = 31.00;
-                    }
-                    if (weight > 2500) {
-                        charge1 = 31.00 + (weight - 2500) / 500 * 4.00;
-                    }
-                }
+                JOptionPane.showMessageDialog(this, "Data Saved");
+
             }
-            JOptionPane.showMessageDialog(this, "Data Saved");
+        }catch (NumberFormatException e1){
+            JOptionPane.showMessageDialog(this, "Please select radio button and key in data!!!");
 
         }if (e.getSource()==button2){
             new MainMenu();
