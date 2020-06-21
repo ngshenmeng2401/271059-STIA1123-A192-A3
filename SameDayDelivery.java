@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SameDayDelivery extends JFrame implements ActionListener{
@@ -17,10 +20,11 @@ public class SameDayDelivery extends JFrame implements ActionListener{
     private JPanel contentPane;
     private JTable table;
     private JButton button1,button2;
-    private JTextField textField2;
+    private JTextField textField1,textField2;
     private JRadioButton rb8, rb9;
+    private int quantity;
     private static double weight,charge2,domestic_charge,surcharge;
-
+    private static ArrayList ItemList2 = new ArrayList();
 
     public SameDayDelivery() {
 
@@ -56,15 +60,25 @@ public class SameDayDelivery extends JFrame implements ActionListener{
         contentPane.add(rb8);
         contentPane.add(rb9);
 
-        textField2 = new JTextField();
-        textField2.setBounds(150, 230, 165, 25);
-        textField2.setBackground(Color.white);
-        contentPane.add(textField2);
+        textField1 = new JTextField();
+        textField1.setBounds(150, 230, 165, 25);
+        textField1.setBackground(Color.white);
+        contentPane.add(textField1);
         panel.setBackground(Color.white);
 
         JLabel label2 = new JLabel("Weight:");
         label2.setBounds(20, 230, 100, 25);
         contentPane.add(label2);
+
+        textField2 = new JTextField();
+        textField2.setBounds(150, 270, 165, 25);
+        textField2.setBackground(Color.white);
+        contentPane.add(textField2);
+        panel.setBackground(Color.white);
+
+        JLabel label3 = new JLabel("Quantity:");
+        label3.setBounds(20, 270, 120, 25);
+        contentPane.add(label3);
 
         button1 = new JButton("Save");
         button1.setBounds(40, 300, 100, 25);
@@ -124,8 +138,10 @@ public class SameDayDelivery extends JFrame implements ActionListener{
         try{
             if (e.getSource()==button1){
 
-                String text = textField2.getText();
-                weight= Double.parseDouble(text);
+                String text1 = textField1.getText();
+                String text2 = textField2.getText();
+                weight= Double.parseDouble(text1);
+                quantity=Integer.parseInt(text2);
 
                 if (rb8.isSelected()){
                     if(weight<=500){
@@ -150,9 +166,29 @@ public class SameDayDelivery extends JFrame implements ActionListener{
                         surcharge=7.50;
                     }
                 }
+                System.out.println(quantity);
+                System.out.println(weight);
+
 
                 JOptionPane.showMessageDialog(this, "Data Saved");
 
+                ItemList2.add(quantity);
+                ItemList2.add(weight);
+                ItemList2.add(charge2);
+
+                File file2 = new File("SDD.txt");
+                try {
+                    file2.createNewFile();
+                    FileWriter fw= new FileWriter(file2);
+                    fw.write(String.valueOf(ItemList2));
+                    fw.flush();
+                    fw.close();
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                charge2=(domestic_charge+surcharge)*quantity;
+                System.out.println(charge2);
             }
         }catch (NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Please select radio button and key in data!!!");
@@ -161,7 +197,6 @@ public class SameDayDelivery extends JFrame implements ActionListener{
             new MainMenu();
             setVisible(false);
         }
-        charge2=domestic_charge+surcharge;
     }
 
     public double getCharge2() {

@@ -3,6 +3,9 @@ package Assignment2;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Receipt extends JFrame implements ActionListener {
 
@@ -16,6 +19,7 @@ public class Receipt extends JFrame implements ActionListener {
     JLabel label1,label2,label3,label4,label5,label6;
     JLabel line1,line2,line3;
     JTextField text1,text2,text3;
+
     private static double charge1=delivery1.getCharge1();
     private static double charge2=delivery2.getCharge2();
     private static double charge3=delivery3.getCharge3();
@@ -79,19 +83,49 @@ public class Receipt extends JFrame implements ActionListener {
         label5.setBounds(200, 310, 200, 20);
         label6.setBounds(200, 350, 200, 20);
 
-        //Convert Double to String
-        String amount1 = Double.toString(charge1);
-        String amount2 = Double.toString(charge2);
-        String amount3 = Double.toString(charge3);
-        String amount4 = Double.toString(charge4);
-        Double totalprice=charge1+charge2+charge3+charge4;
-        String amount5 = Double.toString(totalprice);
+        char[] list1= new char[40];
+        char[] list2= new char[40];
+        char[] list3= new char[40];
+        char[] list4= new char[40];
 
-        label2.setText(amount1);
-        label3.setText(amount2);
-        label4.setText(amount3);
-        label5.setText(amount4);
-        label6.setText(amount5);
+        File file1 = new File("NDD.txt");
+        File file2 = new File("SDD.txt");
+        File file3 = new File("PBE.txt");
+        File file4 = new File("PE.txt");
+
+        try {
+            FileReader fr1 = new FileReader(file1);
+            FileReader fr2 = new FileReader(file2);
+            FileReader fr3 = new FileReader(file3);
+            FileReader fr4 = new FileReader(file4);
+            fr1.read(list1);
+            fr2.read(list2);
+            fr3.read(list3);
+            fr4.read(list4);
+            fr1.close();
+            fr2.close();
+            fr3.close();
+            fr4.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //Convert Double to String
+//        String amount1 = Double.toString(charge1);
+//        String amount2 = Double.toString(charge2);
+//        String amount3 = Double.toString(charge3);
+//        String amount4 = Double.toString(charge4);
+        double totalprice=charge1+charge2+charge3+charge4;
+//        String amount5 = Double.toString(totalprice);
+
+        label2.setText(String.valueOf(list1));
+        label3.setText(String.valueOf(list2));
+        label4.setText(String.valueOf(list3));
+        label5.setText(String.valueOf(list4));
+
+        System.out.println(list2);
 
         //Add object
         add(name);

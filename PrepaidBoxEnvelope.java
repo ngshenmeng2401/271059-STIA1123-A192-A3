@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
@@ -18,6 +21,7 @@ public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
     private JTextField textField3, textField4;
     private static double charge3,price,weight;
     private int quantity;
+    private static ArrayList ItemList3 = new ArrayList();
 
     public PrepaidBoxEnvelope() {
         addWindowListener(new WindowAdapter() {
@@ -115,6 +119,21 @@ public class PrepaidBoxEnvelope extends JFrame implements ActionListener{
                 charge3=price*quantity;
                 JOptionPane.showMessageDialog(this, "Data Saved");
 
+                ItemList3.add(quantity);
+                ItemList3.add(weight);
+                ItemList3.add(charge3);
+
+                File file3 = new File("PBE.txt");
+                try {
+                    file3.createNewFile();
+                    FileWriter fw= new FileWriter(file3);
+                    fw.write(String.valueOf(ItemList3));
+                    fw.flush();
+                    fw.close();
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }catch (NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Please key in data!!!");
